@@ -36,6 +36,7 @@
 		<module>catalog</module>
 		<module>application</module>
 		<module>database-migrations</module>
+		<module>auth</module>
 	</modules>
 
 </project>

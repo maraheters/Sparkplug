@@ -40,8 +40,8 @@ CREATE TABLE generation
 CREATE TABLE manufacturer
 (
     id      SERIAL NOT NULL,
-    name    VARCHAR(255),
-    country VARCHAR(255),
+    name    VARCHAR(255) NOT NULL UNIQUE ,
+    country VARCHAR(255) NOT NULL,
 
     CONSTRAINT pk_manufacturer PRIMARY KEY (id)
 );

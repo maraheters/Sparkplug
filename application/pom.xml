@@ -42,6 +42,11 @@
             <artifactId>catalog</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.sparkplug</groupId>
+            <artifactId>auth</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!--Swagger-->
         <dependency>

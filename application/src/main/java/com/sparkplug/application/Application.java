@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"com.sparkplug.catalog"})
-@EntityScan({"com.sparkplug.catalog"})
-@EnableJpaRepositories({"com.sparkplug.catalog"})
+@ComponentScan({"com.sparkplug.catalog", "com.sparkplug.auth"})
+@EntityScan({"com.sparkplug.catalog", "com.sparkplug.auth"})
+@EnableJpaRepositories({"com.sparkplug.catalog", "com.sparkplug.auth"})
 public class Application {
 
     public static void main(String[] args) {
