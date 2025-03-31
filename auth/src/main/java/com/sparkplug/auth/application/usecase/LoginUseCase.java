@@ -1,8 +1,8 @@
 package com.sparkplug.auth.application.usecase;
 
-import com.sparkplug.auth.application.dto.LoginCommand;
-import com.sparkplug.auth.application.dto.AuthResponse;
+import com.sparkplug.auth.application.dto.request.LoginRequest;
+import com.sparkplug.auth.application.dto.response.AuthResponse;
 
 public interface LoginUseCase {
-    AuthResponse execute(LoginCommand loginCommand);
+    AuthResponse login(LoginRequest loginRequest);
 }

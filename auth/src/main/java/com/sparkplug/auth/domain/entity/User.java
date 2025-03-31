@@ -1,7 +1,9 @@
 package com.sparkplug.auth.domain.entity;
 
+import com.sparkplug.auth.domain.contract.PasswordHasher;
 import com.sparkplug.auth.domain.vo.Email;
 import com.sparkplug.auth.domain.vo.PhoneNumber;
+import com.sparkplug.auth.domain.vo.RawPassword;
 import com.sparkplug.auth.domain.vo.Username;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,4 +41,26 @@ public abstract class User {
     protected String passwordHash;
 
     public abstract List<String> getAuthorities();
+
+    public void changeUsername(Username username) {
+        this.username = username;
+    }
+
+    public void changeEmail(Email email) {
+        this.email = email;
+    }
+
+    public void changePhoneNumber(PhoneNumber phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void changePassword(RawPassword oldPassword, RawPassword newPassword, PasswordHasher hasher) {
+        var oldPasswordHash = hasher.hashPassword(oldPassword);
+        var newPasswordHash = hasher.hashPassword(newPassword);
+        if(!this.passwordHash.equals(oldPasswordHash)) {
+            throw new IllegalArgumentException("Passwords dont match.");
+        }
+
+        this.passwordHash = newPasswordHash;
+    }
 }

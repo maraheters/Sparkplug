@@ -1,13 +1,15 @@
 package com.sparkplug.auth.domain.entity;
 
-import com.sparkplug.auth.domain.enums.AdminRole;
+import com.sparkplug.auth.domain.contract.PasswordHasher;
 import com.sparkplug.auth.domain.vo.Email;
 import com.sparkplug.auth.domain.vo.PhoneNumber;
+import com.sparkplug.auth.domain.vo.RawPassword;
 import com.sparkplug.auth.domain.vo.Username;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -23,7 +25,7 @@ public class Admin extends User {
             name = "admin_authority_admin",
             joinColumns = @JoinColumn(name = "admin_id"),
             inverseJoinColumns = @JoinColumn(name = "admin_authority_id"))
-    private List<AdminAuthority> authorities;
+    private List<AdminAuthority> authorities = new ArrayList<>();
 
     @Override
     public List<String> getAuthorities() {
@@ -45,7 +47,9 @@ public class Admin extends User {
     }
 
     public static Admin createWithEmail(
-            Username username, Email email, String passwordHash, List<AdminAuthority> authorities) {
+            Username username, Email email, RawPassword password, List<AdminAuthority> authorities, PasswordHasher hasher) {
+
+        var passwordHash = hasher.hashPassword(password);
 
         return Admin.getBaseBuilder(username, passwordHash, authorities)
                 .email(email)
@@ -53,7 +57,9 @@ public class Admin extends User {
     }
 
     public static Admin createWithPhoneNumber(
-            Username username, PhoneNumber phoneNumber, String passwordHash, List<AdminAuthority> authorities) {
+            Username username, PhoneNumber phoneNumber, RawPassword password, List<AdminAuthority> authorities, PasswordHasher hasher) {
+
+        var passwordHash = hasher.hashPassword(password);
 
         return Admin.getBaseBuilder(username, passwordHash, authorities)
                 .phoneNumber(phoneNumber)
@@ -61,7 +67,9 @@ public class Admin extends User {
     }
 
     public static Admin createWithPhoneNumberAndEmail(
-            Username username, PhoneNumber phoneNumber, Email email, String passwordHash, List<AdminAuthority> authorities) {
+            Username username, PhoneNumber phoneNumber, Email email, RawPassword password, List<AdminAuthority> authorities, PasswordHasher hasher) {
+
+        var passwordHash = hasher.hashPassword(password);
 
         return Admin.getBaseBuilder(username, passwordHash, authorities)
                 .phoneNumber(phoneNumber)

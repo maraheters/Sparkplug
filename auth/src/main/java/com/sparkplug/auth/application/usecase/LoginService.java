@@ -1,9 +1,9 @@
 package com.sparkplug.auth.application.usecase;
 
-import com.sparkplug.auth.application.dto.LoginCommand;
-import com.sparkplug.auth.application.dto.AuthResponse;
-import com.sparkplug.auth.security.service.JwtService;
-import com.sparkplug.auth.security.user.SparkplugUserDetails;
+import com.sparkplug.auth.application.dto.request.LoginRequest;
+import com.sparkplug.auth.application.dto.response.AuthResponse;
+import com.sparkplug.auth.infrastructure.security.service.JwtService;
+import com.sparkplug.auth.infrastructure.security.user.SparkplugUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,15 +23,15 @@ public class LoginService implements LoginUseCase {
     }
 
     @Override
-    public AuthResponse execute(LoginCommand loginCommand) {
+    public AuthResponse login(LoginRequest request) {
 
-        var username = loginCommand.username();
-        var password = loginCommand.password();
+        var username = request.username();
+        var password = request.password();
 
         var authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username.value(), password.value()));
+                new UsernamePasswordAuthenticationToken(username, password));
 
-        var token = jwtService.generateToken(username.value());
+        var token = jwtService.generateToken(username);
 
         var userDetails = (SparkplugUserDetails) authentication.getPrincipal();
 

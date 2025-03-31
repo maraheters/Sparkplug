@@ -1,12 +1,15 @@
 package com.sparkplug.auth.domain.entity;
 
+import com.sparkplug.auth.domain.contract.PasswordHasher;
 import com.sparkplug.auth.domain.vo.Email;
 import com.sparkplug.auth.domain.vo.PhoneNumber;
+import com.sparkplug.auth.domain.vo.RawPassword;
 import com.sparkplug.auth.domain.vo.Username;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static lombok.AccessLevel.*;
@@ -43,7 +46,9 @@ public class Client extends User {
     }
 
     public static Client createWithEmail(
-            Username username, Email email, String passwordHash, List<ClientAuthority> authorities) {
+            Username username, Email email, RawPassword password, List<ClientAuthority> authorities, PasswordHasher hasher) {
+
+        var passwordHash = hasher.hashPassword(password);
 
         return Client.getBaseBuilder(username, passwordHash, authorities)
                 .email(email)
@@ -51,7 +56,9 @@ public class Client extends User {
     }
 
     public static Client createWithPhoneNumber(
-            Username username, PhoneNumber phoneNumber, String passwordHash, List<ClientAuthority> authorities) {
+            Username username, PhoneNumber phoneNumber, RawPassword password, List<ClientAuthority> authorities, PasswordHasher hasher) {
+
+        var passwordHash = hasher.hashPassword(password);
 
         return Client.getBaseBuilder(username, passwordHash, authorities)
                 .phoneNumber(phoneNumber)
@@ -59,7 +66,9 @@ public class Client extends User {
     }
 
     public static Client createWithPhoneNumberAndEmail(
-            Username username, PhoneNumber phoneNumber, Email email, String passwordHash, List<ClientAuthority> authorities) {
+            Username username, PhoneNumber phoneNumber, Email email, RawPassword password, List<ClientAuthority> authorities, PasswordHasher hasher) {
+
+        var passwordHash = hasher.hashPassword(password);
 
         return Client.getBaseBuilder(username, passwordHash, authorities)
                 .phoneNumber(phoneNumber)
