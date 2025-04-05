@@ -20,11 +20,17 @@ public class SparkplugUserDetails implements UserDetails {
     }
 
     public String getEmail() {
-        return user.getEmail().value();
+        var email = user.getEmail();
+        return email != null
+                ? email.value()
+                : null;
     }
 
     public String getPhoneNumber() {
-        return user.getPhoneNumber().value();
+        var phoneNumber = user.getPhoneNumber();
+        return phoneNumber != null
+                ? phoneNumber.value()
+                : null;
     }
 
     @Override

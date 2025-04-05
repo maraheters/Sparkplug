@@ -9,13 +9,12 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static lombok.AccessLevel.*;
 
 @Entity
-@Table(name = "client")
+@Table(name = "client", schema = "auth")
 @NoArgsConstructor(access = PROTECTED)
 public class Client extends User {
 

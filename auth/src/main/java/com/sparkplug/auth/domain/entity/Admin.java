@@ -16,7 +16,7 @@ import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
-@Table(name = "admin")
+@Table(name = "admin", schema = "auth")
 @NoArgsConstructor(access = PROTECTED)
 public class Admin extends User {
 

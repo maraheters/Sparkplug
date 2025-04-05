@@ -34,11 +34,6 @@
     <dependencies>
         <dependency>
             <groupId>com.sparkplug</groupId>
-            <artifactId>database-migrations</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sparkplug</groupId>
             <artifactId>catalog</artifactId>
             <version>${project.version}</version>
         </dependency>

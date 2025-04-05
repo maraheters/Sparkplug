@@ -19,7 +19,7 @@ import static lombok.AccessLevel.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PROTECTED)
-@Table(name = "base_user")
+@Table(name = "base_user", schema = "auth")
 public abstract class User {
 
     @Id
