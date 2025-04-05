@@ -1,4 +1,4 @@
-package com.sparkplug.auth.domain.repository;
+package com.sparkplug.auth.application.repository;
 
 import com.sparkplug.auth.domain.entity.AdminAuthority;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.sparkplug.auth.infrastructure.security.config;
+package com.sparkplug.auth.application.security.config;
 
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpStatus;

@@ -1,9 +1,10 @@
-package com.sparkplug.auth.application.usecase;
+package com.sparkplug.auth.application.service;
 
 import com.sparkplug.auth.application.dto.request.LoginRequest;
 import com.sparkplug.auth.application.dto.response.AuthResponse;
-import com.sparkplug.auth.infrastructure.security.service.JwtService;
-import com.sparkplug.auth.infrastructure.security.user.SparkplugUserDetails;
+import com.sparkplug.auth.application.usecase.LoginUseCase;
+import com.sparkplug.auth.application.security.service.JwtService;
+import com.sparkplug.auth.application.security.user.SparkplugUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

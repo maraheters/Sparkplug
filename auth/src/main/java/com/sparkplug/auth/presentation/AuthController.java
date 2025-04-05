@@ -6,7 +6,7 @@ import com.sparkplug.auth.application.usecase.AdminRegisterUseCase;
 import com.sparkplug.auth.application.usecase.ClientRegisterUseCase;
 import com.sparkplug.auth.application.usecase.LoginUseCase;
 import com.sparkplug.auth.application.usecase.UpdateCredentialsUseCase;
-import com.sparkplug.auth.infrastructure.security.user.SparkplugUserDetails;
+import com.sparkplug.auth.application.security.user.SparkplugUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

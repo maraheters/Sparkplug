@@ -2,6 +2,7 @@ package com.sparkplug.auth.application.usecase;
 
 import com.sparkplug.auth.application.dto.request.AdminRegisterEmailRequest;
 import com.sparkplug.auth.application.dto.request.AdminRegisterPhoneNumberRequest;
+import com.sparkplug.auth.application.service.AdminRegisterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

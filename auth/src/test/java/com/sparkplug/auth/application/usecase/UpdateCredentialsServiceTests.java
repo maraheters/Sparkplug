@@ -4,6 +4,7 @@ import com.sparkplug.auth.application.dto.request.UpdateEmailRequest;
 import com.sparkplug.auth.application.dto.request.UpdatePasswordRequest;
 import com.sparkplug.auth.application.dto.request.UpdatePhoneNumberRequest;
 import com.sparkplug.auth.application.dto.request.UpdateUsernameRequest;
+import com.sparkplug.auth.application.service.UpdateCredentialsService;
 import com.sparkplug.auth.domain.entity.Client;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

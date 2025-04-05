@@ -1,4 +1,4 @@
-package com.sparkplug.auth.infrastructure.security.service;
+package com.sparkplug.auth.application.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

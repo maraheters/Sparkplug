@@ -1,4 +1,4 @@
-package com.sparkplug.auth.infrastructure.security;
+package com.sparkplug.auth.application.security;
 
 import com.sparkplug.auth.domain.contract.PasswordHasher;
 import com.sparkplug.auth.domain.vo.RawPassword;

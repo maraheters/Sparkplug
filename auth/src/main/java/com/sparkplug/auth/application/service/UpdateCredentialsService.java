@@ -1,12 +1,13 @@
-package com.sparkplug.auth.application.usecase;
+package com.sparkplug.auth.application.service;
 
 import com.sparkplug.auth.application.dto.request.UpdateEmailRequest;
 import com.sparkplug.auth.application.dto.request.UpdatePasswordRequest;
 import com.sparkplug.auth.application.dto.request.UpdatePhoneNumberRequest;
 import com.sparkplug.auth.application.dto.request.UpdateUsernameRequest;
+import com.sparkplug.auth.application.usecase.UpdateCredentialsUseCase;
 import com.sparkplug.auth.domain.contract.PasswordHasher;
 import com.sparkplug.auth.domain.entity.User;
-import com.sparkplug.auth.domain.repository.UsersRepository;
+import com.sparkplug.auth.application.repository.UsersRepository;
 import com.sparkplug.auth.domain.vo.Email;
 import com.sparkplug.auth.domain.vo.PhoneNumber;
 import com.sparkplug.auth.domain.vo.RawPassword;

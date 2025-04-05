@@ -1,6 +1,7 @@
 package com.sparkplug.auth.application.usecase;
 
 import com.sparkplug.auth.application.dto.request.LoginRequest;
+import com.sparkplug.auth.application.service.LoginService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

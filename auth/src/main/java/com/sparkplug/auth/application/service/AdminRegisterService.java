@@ -1,16 +1,19 @@
-package com.sparkplug.auth.application.usecase;
+package com.sparkplug.auth.application.service;
 
 import com.sparkplug.auth.application.dto.request.AdminRegisterEmailRequest;
 import com.sparkplug.auth.application.dto.request.AdminRegisterPhoneNumberRequest;
 import com.sparkplug.auth.application.dto.response.AuthResponse;
+import com.sparkplug.auth.application.repository.AdminAuthoritiesRepository;
+import com.sparkplug.auth.application.repository.AdminsRepository;
+import com.sparkplug.auth.application.repository.UsersRepository;
+import com.sparkplug.auth.application.usecase.AdminRegisterUseCase;
 import com.sparkplug.auth.domain.contract.PasswordHasher;
 import com.sparkplug.auth.domain.entity.Admin;
-import com.sparkplug.auth.domain.repository.*;
 import com.sparkplug.auth.domain.vo.Email;
 import com.sparkplug.auth.domain.vo.PhoneNumber;
 import com.sparkplug.auth.domain.vo.RawPassword;
 import com.sparkplug.auth.domain.vo.Username;
-import com.sparkplug.auth.infrastructure.security.service.JwtService;
+import com.sparkplug.auth.application.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
