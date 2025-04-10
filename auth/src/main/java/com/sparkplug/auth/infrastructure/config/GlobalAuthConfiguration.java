@@ -5,5 +5,5 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource("classpath:application-auth.properties")
-public class GlobalConfiguration {
+public class GlobalAuthConfiguration {
 }

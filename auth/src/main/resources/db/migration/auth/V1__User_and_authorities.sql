@@ -74,4 +74,5 @@ INSERT INTO client_authority(name) VALUES ('CLIENT_BASIC');
 INSERT INTO client_authority(name) VALUES ('CLIENT_PLUS');
 
 INSERT INTO admin_authority(name) VALUES ('ADMIN_BASIC');
+INSERT INTO admin_authority(name) VALUES ('ADMIN_MANAGER');
 INSERT INTO admin_authority(name) VALUES ('ADMIN_GOD');

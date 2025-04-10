@@ -30,6 +30,7 @@ public class AdminRegisterService implements AdminRegisterUseCase {
     private final UsersRepository usersRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final UniquenessValidator uniquenessValidator = new UniquenessValidator();
 
     @Autowired
     public AdminRegisterService(
@@ -54,8 +55,8 @@ public class AdminRegisterService implements AdminRegisterUseCase {
         var password = new RawPassword(request.password());
         var roles = request.roles();
 
-        validateUniqueness("Username", username, usersRepository::existsByUsername);
-        validateUniqueness("Email", email, usersRepository::existsByEmail);
+        uniquenessValidator.validateUniqueness("Username", username, usersRepository::existsByUsername);
+        uniquenessValidator.validateUniqueness("Email", email, usersRepository::existsByEmail);
 
         var admin = createAdmin(username, email, null, password, roles);
         var id = adminsRepository.save(admin).getId();
@@ -79,8 +80,8 @@ public class AdminRegisterService implements AdminRegisterUseCase {
         var password = new RawPassword(request.password());
         var roles = request.roles();
 
-        validateUniqueness("Username", username, usersRepository::existsByUsername);
-        validateUniqueness("Phone number", phoneNumber, usersRepository::existsByPhoneNumber);
+        uniquenessValidator.validateUniqueness("Username", username, usersRepository::existsByUsername);
+        uniquenessValidator.validateUniqueness("Phone number", phoneNumber, usersRepository::existsByPhoneNumber);
 
         var admin = createAdmin(username, null, phoneNumber, password, roles);
         var id = adminsRepository.save(admin).getId();
@@ -94,12 +95,6 @@ public class AdminRegisterService implements AdminRegisterUseCase {
                 token,
                 admin.getAuthorities()
         );
-    }
-
-    private <T> void validateUniqueness(String fieldName, T value, Predicate<T> existsCheck) {
-        if (existsCheck.test(value)) {
-            throw new IllegalArgumentException(fieldName + " is already taken: " + value);
-        }
     }
 
     private Admin createAdmin(Username username, Email email, PhoneNumber phoneNumber, RawPassword password, List<String> roles) {

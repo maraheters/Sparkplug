@@ -33,6 +33,11 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.sparkplug.common</groupId>
+            <artifactId>exception</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>com.sparkplug</groupId>
             <artifactId>catalog</artifactId>
             <version>${project.version}</version>

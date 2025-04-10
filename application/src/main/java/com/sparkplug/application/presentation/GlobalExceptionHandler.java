@@ -1,7 +1,9 @@
-package com.sparkplug.auth.application.security.config;
+package com.sparkplug.application.presentation;
 
+import com.sparkplug.common.exception.ApplicationException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -11,9 +13,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({IllegalArgumentException.class})
-    public ProblemDetail handleResourceNotFoundException(RuntimeException e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+    @ExceptionHandler({ApplicationException.class})
+    public ProblemDetail handleApplicationException(ApplicationException exception) {
+
+        var statusCode = HttpStatusCode.valueOf(exception.getStatusCode());
+        var message = exception.getMessage();
+
+        return ProblemDetail.forStatusAndDetail(statusCode, message);
     }
 
     @ExceptionHandler({
@@ -24,10 +30,13 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleAuthenticationException(RuntimeException e) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, e.getMessage());
     }
+
     @ExceptionHandler({RuntimeException.class})
-    public ProblemDetail handleRuntimeException(RuntimeException e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+    public ProblemDetail handleRuntimeException(RuntimeException exception) {
+
+        var statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+        var message = exception.getMessage();
+
+        return ProblemDetail.forStatusAndDetail(statusCode, message);
     }
-
-
 }

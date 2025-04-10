@@ -3,6 +3,7 @@ package com.sparkplug.auth.application.service;
 import com.sparkplug.auth.application.dto.request.ClientRegisterPhoneNumberRequest;
 import com.sparkplug.auth.application.dto.response.AuthResponse;
 import com.sparkplug.auth.application.dto.request.ClientRegisterEmailRequest;
+import com.sparkplug.auth.application.exception.AlreadyTakenException;
 import com.sparkplug.auth.application.usecase.ClientRegisterUseCase;
 import com.sparkplug.auth.domain.contract.PasswordHasher;
 import com.sparkplug.auth.domain.entity.Client;
@@ -22,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 @Service
 public class ClientRegisterService implements ClientRegisterUseCase {
@@ -32,6 +32,7 @@ public class ClientRegisterService implements ClientRegisterUseCase {
     private final UsersRepository usersRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final UniquenessValidator uniquenessValidator = new UniquenessValidator();
 
     @Autowired
     public ClientRegisterService(
@@ -54,8 +55,8 @@ public class ClientRegisterService implements ClientRegisterUseCase {
         var email = new Email(request.email());
         var password = new RawPassword(request.password());
 
-        validateUniqueness("Username", username, usersRepository::existsByUsername);
-        validateUniqueness("Email", email, usersRepository::existsByEmail);
+        uniquenessValidator.validateUniqueness("Username", username, usersRepository::existsByUsername);
+        uniquenessValidator.validateUniqueness("Email", email, usersRepository::existsByEmail);
 
         var client = createClient(username, email, null, password);
 
@@ -79,8 +80,8 @@ public class ClientRegisterService implements ClientRegisterUseCase {
         var phoneNumber = new PhoneNumber(request.phoneNumber());
         var password = new RawPassword(request.password());
 
-        validateUniqueness("Username", username, usersRepository::existsByUsername);
-        validateUniqueness("Phone number", phoneNumber, usersRepository::existsByPhoneNumber);
+        uniquenessValidator.validateUniqueness("Username", username, usersRepository::existsByUsername);
+        uniquenessValidator.validateUniqueness("Phone number", phoneNumber, usersRepository::existsByPhoneNumber);
 
         var client = createClient(username, null, phoneNumber, password);
 
@@ -107,14 +108,11 @@ public class ClientRegisterService implements ClientRegisterUseCase {
         if (email != null) {
             return Client.createWithEmail(username, email, password, roles, hasher);
         }
-        return Client.createWithPhoneNumber(username, phoneNumber, password, roles, hasher);
-}
 
-    private <T> void validateUniqueness(String fieldName, T value, Predicate<T> existsCheck) {
-        if (existsCheck.test(value)) {
-            throw new IllegalArgumentException(fieldName + " is already taken: " + value);
-        }
+        return Client.createWithPhoneNumber(username, phoneNumber, password, roles, hasher);
     }
+
+
 
 
 }
