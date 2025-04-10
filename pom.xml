@@ -36,6 +36,7 @@
 		<module>catalog</module>
 		<module>application</module>
 		<module>auth</module>
+		<module>common/exception</module>
 	</modules>
 
 </project>
