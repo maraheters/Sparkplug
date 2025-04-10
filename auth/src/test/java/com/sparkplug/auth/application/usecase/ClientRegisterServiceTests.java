@@ -2,6 +2,7 @@ package com.sparkplug.auth.application.usecase;
 
 import com.sparkplug.auth.application.dto.request.ClientRegisterEmailRequest;
 import com.sparkplug.auth.application.dto.request.ClientRegisterPhoneNumberRequest;
+import com.sparkplug.auth.application.exception.AlreadyTakenException;
 import com.sparkplug.auth.application.service.ClientRegisterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -49,7 +50,7 @@ public class ClientRegisterServiceTests extends ServiceTest {
             var request = new ClientRegisterEmailRequest(
                     username.value(), "email@email.com", "password123");
 
-            assertThrows(IllegalArgumentException.class, () -> service.registerWithEmail(request));
+            assertThrows(AlreadyTakenException.class, () -> service.registerWithEmail(request));
         }
 
         @Test
@@ -57,7 +58,7 @@ public class ClientRegisterServiceTests extends ServiceTest {
             var request = new ClientRegisterEmailRequest(
                     "unique_user", email.value(), "password123");
 
-            assertThrows(IllegalArgumentException.class, () -> service.registerWithEmail(request));
+            assertThrows(AlreadyTakenException.class, () -> service.registerWithEmail(request));
         }
 
         @Test
@@ -65,7 +66,7 @@ public class ClientRegisterServiceTests extends ServiceTest {
             var request = new ClientRegisterPhoneNumberRequest(
                     "unique_user", phoneNumber.value(), "password123");
 
-            assertThrows(IllegalArgumentException.class, () -> service.registerWithPhoneNumber(request));
+            assertThrows(AlreadyTakenException.class, () -> service.registerWithPhoneNumber(request));
         }
 
         @BeforeEach

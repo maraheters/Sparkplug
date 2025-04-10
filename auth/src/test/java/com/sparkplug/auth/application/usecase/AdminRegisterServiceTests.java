@@ -2,6 +2,7 @@ package com.sparkplug.auth.application.usecase;
 
 import com.sparkplug.auth.application.dto.request.AdminRegisterEmailRequest;
 import com.sparkplug.auth.application.dto.request.AdminRegisterPhoneNumberRequest;
+import com.sparkplug.auth.application.exception.AlreadyTakenException;
 import com.sparkplug.auth.application.service.AdminRegisterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -51,7 +52,7 @@ public class AdminRegisterServiceTests extends ServiceTest {
             var request = new AdminRegisterEmailRequest(
                     username.value(), "email@email.com", "password123", List.of("ADMIN_MANAGER"));
 
-            assertThrows(IllegalArgumentException.class, () -> service.registerWithEmail(request));
+            assertThrows(AlreadyTakenException.class, () -> service.registerWithEmail(request));
         }
 
         @Test
@@ -59,7 +60,7 @@ public class AdminRegisterServiceTests extends ServiceTest {
             var request = new AdminRegisterEmailRequest(
                     "unique_user", email.value(), "password123", List.of("ADMIN_MANAGER"));
 
-            assertThrows(IllegalArgumentException.class, () -> service.registerWithEmail(request));
+            assertThrows(AlreadyTakenException.class, () -> service.registerWithEmail(request));
         }
 
         @Test
@@ -67,7 +68,7 @@ public class AdminRegisterServiceTests extends ServiceTest {
             var request = new AdminRegisterPhoneNumberRequest(
                     "unique_user", phoneNumber.value(), "password123", List.of("ADMIN_MANAGER"));
 
-            assertThrows(IllegalArgumentException.class, () -> service.registerWithPhoneNumber(request));
+            assertThrows(AlreadyTakenException.class, () -> service.registerWithPhoneNumber(request));
         }
 
         @BeforeEach
