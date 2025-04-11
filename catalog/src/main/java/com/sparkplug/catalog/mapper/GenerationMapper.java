@@ -7,5 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface GenerationMapper {
 
-    GenerationResponseDto toDto(Generation g);
+    GenerationResponseDto toResponseDto(Generation g);
 }

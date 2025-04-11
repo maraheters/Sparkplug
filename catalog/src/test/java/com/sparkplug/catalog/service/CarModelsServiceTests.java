@@ -51,6 +51,15 @@ public class CarModelsServiceTests extends ServiceTest {
     }
 
     @Test
+    void getAllByManufacturerId_whenNotEmpty_thenResultNotEmpty() {
+        insertCarModel(manufacturerId);
+
+        var result = service.getAllByManufacturerId(manufacturerId);
+
+        assertEquals(1, result.size());
+    }
+
+    @Test
     void getById_whenDoesNotExist_shouldThrow() {
         var id = 8L;
 

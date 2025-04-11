@@ -4,9 +4,9 @@ public record ModificationResponseDto(
         Long id,
         String name,
         Long generationId,
-        DrivetrainDto drivetrainDto,
-        EngineDto engineDto,
-        TransmissionDto transmissionDto
+        DrivetrainDto drivetrain,
+        EngineDto engine,
+        TransmissionDto transmission
 ) {
 
     public record DrivetrainDto(Long id, String type){}

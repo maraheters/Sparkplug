@@ -70,6 +70,15 @@ public class ModificationsServiceTests extends ServiceTest {
     }
 
     @Test
+    void getAllByGenerationId_whenNotEmpty_thenResultNotEmpty() {
+        insertModification(generationId);
+
+        var result = service.getAllByGenerationId(generationId);
+
+        assertEquals(1, result.size());
+    }
+
+    @Test
     void delete_whenDeleted_thenResultEmpty() {
         var id = insertModification(generationId);
 

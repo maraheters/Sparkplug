@@ -52,6 +52,15 @@ public class GenerationsServiceTests extends ServiceTest {
     }
 
     @Test
+    void getAllByCarModelId_whenNotEmpty_thenResultNotEmpty() {
+        insertGeneration(carModelId);
+
+        var result = service.getAllByCarModelId(carModelId);
+
+        assertEquals(1, result.size());
+    }
+
+    @Test
     void getById_whenDoesNotExist_shouldThrow() {
         var id = 8L;
 

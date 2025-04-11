@@ -66,9 +66,37 @@ public class ServiceTest {
     protected Long insertModification(Long generationId) {
         return transactionTemplate.execute(status -> {
 
+            var generation = Generation.builder().id(generationId).build();
+
             var modification = Modification.builder()
                     .name("TestModification")
+                    .generation(generation)
                     .build();
+
+            modification.setDrivetrain(
+                    Drivetrain.builder()
+                            .type("AWD")
+                            .modification(modification)
+                            .build()
+            );
+
+            modification.setEngine(
+                    Engine.builder()
+                            .type("V8")
+                            .fuelType("Petrol")
+                            .horsepower(400)
+                            .torque(500)
+                            .modification(modification)
+                            .build()
+            );
+
+            modification.setTransmission(
+                    Transmission.builder()
+                            .type("Automatic")
+                            .numberOfGears(8)
+                            .modification(modification)
+                            .build()
+            );
 
             em.persist(modification);
 

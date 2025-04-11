@@ -12,5 +12,5 @@ import java.util.List;
 public interface CarModelsRepository extends JpaRepository<CarModel, Long> {
 
     @Query("SELECT cm FROM CarModel cm WHERE cm.manufacturer.id = :id")
-    List<CarModel> findAllByManufacturerId(Long manufacturerId, Sort sort);
+    List<CarModel> findAllByManufacturerId(Long id, Sort sort);
 }

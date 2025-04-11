@@ -1,4 +1,4 @@
-package com.sparkplug.catalog.controller;
+package com.sparkplug.catalog.controller.manufacturers;
 
 import com.sparkplug.catalog.dto.manufacturer.ManufacturerCreateRequestDto;
 import com.sparkplug.catalog.dto.manufacturer.ManufacturerResponseDto;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-import static com.sparkplug.catalog.controller.ManufacturersController.MANUFACTURERS_ENDPOINT;
+import static com.sparkplug.catalog.controller.manufacturers.ManufacturersController.MANUFACTURERS_ENDPOINT;
 
 @RestController
 @RequestMapping(MANUFACTURERS_ENDPOINT)

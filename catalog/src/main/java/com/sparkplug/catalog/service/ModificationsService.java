@@ -28,6 +28,10 @@ public class ModificationsService {
                 .orElseThrow(() -> new ResourceNotFoundException("Modification", id));
     }
 
+    public List<Modification> getAllByGenerationId(Long generationId) {
+        return repository.findAllByGenerationId(generationId);
+    }
+
     public Long create(ModificationCreateRequestDto dto) {
         var engine = dto.engineDto();
         var transmission = dto.transmissionDto();

@@ -7,6 +7,7 @@ import com.sparkplug.common.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -40,6 +41,11 @@ public class GenerationsService {
     public Generation getById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Generation", id));
+    }
+
+
+    public List<Generation> getAllByCarModelId(Long carModelId) {
+        return repository.getAllByCarModelId(carModelId);
     }
 
     public void delete(Long id) {
