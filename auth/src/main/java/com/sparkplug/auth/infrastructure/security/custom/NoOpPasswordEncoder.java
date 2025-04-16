@@ -1,10 +1,8 @@
-package com.sparkplug.auth.application.security;
+package com.sparkplug.auth.infrastructure.security.custom;
 
-import com.sparkplug.auth.domain.contract.PasswordHasher;
-import com.sparkplug.auth.domain.vo.RawPassword;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class NoOpPasswordEncoder implements PasswordEncoder, PasswordHasher {
+public class NoOpPasswordEncoder implements PasswordEncoder {
 
     @Override
     public String encode(CharSequence rawPassword) {
@@ -16,10 +14,5 @@ public class NoOpPasswordEncoder implements PasswordEncoder, PasswordHasher {
         var rawPasswordString = rawPassword.toString();
 
         return rawPasswordString.equals(encodedPassword);
-    }
-
-    @Override
-    public String hashPassword(RawPassword rawPassword) {
-        return encode(rawPassword.value());
     }
 }

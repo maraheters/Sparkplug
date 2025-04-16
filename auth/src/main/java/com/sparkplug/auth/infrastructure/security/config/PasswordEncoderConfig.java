@@ -1,6 +1,6 @@
-package com.sparkplug.auth.application.security.config;
+package com.sparkplug.auth.infrastructure.security.config;
 
-import com.sparkplug.auth.application.security.NoOpPasswordEncoder;
+import com.sparkplug.auth.infrastructure.security.custom.NoOpPasswordEncoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

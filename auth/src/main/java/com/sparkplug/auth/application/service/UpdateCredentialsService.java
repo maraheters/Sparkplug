@@ -13,7 +13,6 @@ import com.sparkplug.auth.domain.vo.PhoneNumber;
 import com.sparkplug.auth.domain.vo.RawPassword;
 import com.sparkplug.auth.domain.vo.Username;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class UpdateCredentialsService implements UpdateCredentialsUseCase {
 
     private final UsersRepository repository;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordHasher passwordHasher;
 
     @Autowired
-    public UpdateCredentialsService(UsersRepository repository, PasswordEncoder passwordEncoder) {
+    public UpdateCredentialsService(UsersRepository repository, PasswordHasher passwordHasher) {
         this.repository = repository;
-        this.passwordEncoder = passwordEncoder;
+        this.passwordHasher = passwordHasher;
     }
 
     @Override
@@ -34,7 +33,7 @@ public class UpdateCredentialsService implements UpdateCredentialsUseCase {
     public void updatePassword(Long userId, UpdatePasswordRequest request) {
         var user = findById(userId);
 
-        user.changePassword(new RawPassword(request.oldPassword()), new RawPassword(request.newPassword()), (PasswordHasher) passwordEncoder);
+        user.changePassword(new RawPassword(request.oldPassword()), new RawPassword(request.newPassword()), passwordHasher);
 
         repository.save(user);
     }

@@ -1,4 +1,4 @@
-package com.sparkplug.auth.application.security.user;
+package com.sparkplug.auth.infrastructure.security.user;
 
 import com.sparkplug.auth.domain.entity.User;
 import org.springframework.security.core.GrantedAuthority;

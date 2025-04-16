@@ -1,4 +1,4 @@
-package com.sparkplug.auth.application.security.filter;
+package com.sparkplug.auth.infrastructure.security.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,9 +1,9 @@
-package com.sparkplug.auth.application.security.config;
+package com.sparkplug.auth.infrastructure.security.config;
 
 
-import com.sparkplug.auth.application.security.custom.Http403CustomEntryPoint;
-import com.sparkplug.auth.application.security.filter.ExceptionHandlerFilter;
-import com.sparkplug.auth.application.security.filter.JwtFilter;
+import com.sparkplug.auth.infrastructure.security.custom.Http403CustomEntryPoint;
+import com.sparkplug.auth.infrastructure.security.filter.ExceptionHandlerFilter;
+import com.sparkplug.auth.infrastructure.security.filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,5 @@
-package com.sparkplug.auth.application.security.custom;
+package com.sparkplug.auth.infrastructure.security.custom;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;

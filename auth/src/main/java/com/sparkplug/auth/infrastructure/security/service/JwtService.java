@@ -1,4 +1,4 @@
-package com.sparkplug.auth.application.security.service;
+package com.sparkplug.auth.infrastructure.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,7 +12,6 @@ import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -34,23 +33,20 @@ public class JwtService {
         }
     }
 
-    public String generateToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
-
+    public String generateToken(String username, Map<String, Object> extraClaims) {
         var oneHourInMilliseconds = 1000 * 60 * 60;
         var now = new Date(System.currentTimeMillis());
         var expiryDate = new Date(System.currentTimeMillis() + oneHourInMilliseconds * expiryHours);
 
         return Jwts.builder()
                 .claims()
-                .add(claims)
-                .subject(username)
-                .issuedAt(now)
-                .expiration(expiryDate)
+                    .add(extraClaims)
+                    .subject(username)
+                    .issuedAt(now)
+                    .expiration(expiryDate)
                 .and()
                 .signWith(getKey())
                 .compact();
-
     }
 
     public boolean validateToken(String token, String username) {

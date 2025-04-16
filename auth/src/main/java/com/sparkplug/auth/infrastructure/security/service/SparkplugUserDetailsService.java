@@ -1,8 +1,8 @@
-package com.sparkplug.auth.application.security.service;
+package com.sparkplug.auth.infrastructure.security.service;
 
 import com.sparkplug.auth.application.repository.UsersRepository;
 import com.sparkplug.auth.domain.vo.Username;
-import com.sparkplug.auth.application.security.user.SparkplugUserDetails;
+import com.sparkplug.auth.infrastructure.security.user.SparkplugUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
