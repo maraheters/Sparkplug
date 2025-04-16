@@ -7,6 +7,7 @@ import com.sparkplug.common.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,9 +20,10 @@ public class CarModelsService {
     @Autowired
     public CarModelsService(CarModelsRepository repository) {
         this.repository = repository;
-        defaultSort = Sort.by(Sort.Order.asc("name"));
+        this.defaultSort = Sort.by(Sort.Order.asc("name"));
     }
 
+    @Transactional
     public Long create(String name, Long manufacturerId) {
         var carModel = CarModel.builder()
                 .name(name)

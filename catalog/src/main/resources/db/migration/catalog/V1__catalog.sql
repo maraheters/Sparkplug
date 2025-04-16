@@ -38,7 +38,7 @@ CREATE TABLE modification
 CREATE TABLE drivetrain
 (
     id              SERIAL       NOT NULL,
-    type            VARCHAR(255) NOT NULL UNIQUE,
+    type            VARCHAR(255) NOT NULL,
     modification_id BIGINT       NOT NULL,
 
     CONSTRAINT pk_drivetrain PRIMARY KEY (id)

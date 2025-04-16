@@ -5,7 +5,9 @@ import com.sparkplug.catalog.model.*;
 import com.sparkplug.catalog.repository.ModificationsRepository;
 import com.sparkplug.common.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,14 +15,16 @@ import java.util.List;
 public class ModificationsService {
 
     private final ModificationsRepository repository;
+    private final Sort defaultSort;
 
     @Autowired
     public ModificationsService(ModificationsRepository repository) {
         this.repository = repository;
+        this.defaultSort = Sort.by(Sort.Order.asc("name"));
     }
 
     public List<Modification> getAll() {
-        return repository.findAll();
+        return repository.findAll(defaultSort);
     }
 
     public Modification getById(Long id) {
@@ -29,13 +33,14 @@ public class ModificationsService {
     }
 
     public List<Modification> getAllByGenerationId(Long generationId) {
-        return repository.findAllByGenerationId(generationId);
+        return repository.findAllByGenerationId(generationId, defaultSort);
     }
 
+    @Transactional
     public Long create(ModificationCreateRequestDto dto) {
-        var engine = dto.engineDto();
-        var transmission = dto.transmissionDto();
-        var drivetrain = dto.drivetrainDto();
+        var engine = dto.engine();
+        var transmission = dto.transmission();
+        var drivetrain = dto.drivetrain();
 
         var modification = Modification.builder()
                 .name(dto.name())

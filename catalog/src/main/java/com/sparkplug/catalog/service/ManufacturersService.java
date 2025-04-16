@@ -4,7 +4,9 @@ import com.sparkplug.catalog.model.Manufacturer;
 import com.sparkplug.catalog.repository.ManufacturersRepository;
 import com.sparkplug.common.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,12 +14,15 @@ import java.util.List;
 public class ManufacturersService {
 
     private final ManufacturersRepository repository;
+    private final Sort defaultSort;
 
     @Autowired
     public ManufacturersService(ManufacturersRepository repository) {
         this.repository = repository;
+        this.defaultSort = Sort.by(Sort.Order.asc("name"));
     }
 
+    @Transactional
     public Long create(String name, String country) {
         var manufacturer = Manufacturer.builder()
                 .name(name)
@@ -28,7 +33,7 @@ public class ManufacturersService {
     }
 
     public List<Manufacturer> getAll() {
-        return repository.findAll();
+        return repository.findAll(defaultSort);
     }
 
     public Manufacturer getById(Long id) {

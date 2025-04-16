@@ -3,9 +3,9 @@ package com.sparkplug.catalog.dto.modification;
 public record ModificationCreateRequestDto(
         String name,
         Long generationId,
-        DrivetrainCreateRequestDto drivetrainDto,
-        EngineCreateRequestDto engineDto,
-        TransmissionCreateRequestDto transmissionDto
+        DrivetrainCreateRequestDto drivetrain,
+        EngineCreateRequestDto engine,
+        TransmissionCreateRequestDto transmission
 ) {
 
     public record DrivetrainCreateRequestDto(String type){}
