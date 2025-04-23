@@ -20,7 +20,6 @@ public class Http403CustomEntryPoint implements AuthenticationEntryPoint {
             HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException {
 
-
         logger.debug("Pre-authenticated entry point called. Rejecting access");
 
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);

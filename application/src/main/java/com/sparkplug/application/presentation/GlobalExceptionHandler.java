@@ -31,12 +31,13 @@ public class GlobalExceptionHandler {
         return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, e.getMessage());
     }
 
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ProblemDetail handleIllegalArgumentException(RuntimeException e) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
     @ExceptionHandler({RuntimeException.class})
-    public ProblemDetail handleRuntimeException(RuntimeException exception) {
-
-        var statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-        var message = exception.getMessage();
-
-        return ProblemDetail.forStatusAndDetail(statusCode, message);
+    public ProblemDetail handleRuntimeException(RuntimeException e) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }
 }
